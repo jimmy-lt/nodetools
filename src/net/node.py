@@ -255,18 +255,3 @@ class OmniSwitch(Node):
 
             if match:
                 return match.group(1).lower()
-
-
-
-
-if __name__ == '__main__':
-    cisco = Cisco('ssh', '139.54.75.65', 'admin', 'alcatel')
-    os = OmniSwitch('telnet', '100.20.255.2', 'admin', 'switch', '\w\s\(PL-\d{4}\)>\s')
-
-    nodes = [cisco, os]
-
-    for node in nodes:
-        node.connect()
-        print node.get_hostname()
-
-        node.quit()

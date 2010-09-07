@@ -101,9 +101,3 @@ def clear_comments(content, marker):
         out.append(line)
 
     return out
-
-
-
-
-if __name__ == '__main__':
-    pass

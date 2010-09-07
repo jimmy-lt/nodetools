@@ -139,24 +139,3 @@ class Backup(object):
 
         # Puis on ferme ce dernier.
         f.close()
-
-
-
-
-if __name__ == '__main__':
-    import sys
-
-
-
-    if len(sys.argv) == 2:
-        bak = Backup(sys.argv[1])
-
-        print bak.get_most_recent_file()
-        print bak.get_most_recent_file_content()
-
-    if len(sys.argv) == 3:
-        bak = Backup(sys.argv[1])
-        pattern = sys.argv[2]
-
-        print bak.get_most_recent_file(pattern)
-        print bak.get_most_recent_file_content(pattern)

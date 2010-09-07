@@ -23,8 +23,3 @@ def date_to_str(date, format):
 
 def str_to_date(date_string, date_format):
     return datetime.datetime.strptime(date_string, date_format)
-
-
-
-if __name__ == '__main__':
-    pass

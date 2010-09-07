@@ -373,4 +373,3 @@ class Nodesnap(object):
                 email.set_server(mail_server)
 
             email.send()
-

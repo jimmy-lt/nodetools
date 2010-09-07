@@ -280,17 +280,3 @@ class Telnet(Connect):
             return False
         except pexpect.EOF:
             return False
-
-
-
-
-if __name__ == '__main__':
-    con = Telnet('100.10.255.2', 'admin', 'switch')
-    con.login()
-
-    cmd = con.run('write terminal')
-
-    for line in cmd:
-        print line
-
-    con.close()
