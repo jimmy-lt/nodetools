@@ -19,7 +19,7 @@ You must install it before using this tool.
 
 Change to the nodesnap source directory and run:
 
-  python nodesnap.py /path/to/config_file.ini
+    python nodesnap.py /path/to/config_file.ini
 
 
 Features
@@ -32,8 +32,8 @@ this one is written on the disk.
 
 Files are written on the disk by following this pattern:
 
-  /root_directory/backup/(group)/(node's subsection)/file_pattern
-  /root_directory/diff/(group)/(node's subsection)/file_pattern
+    /root_directory/backup/(group)/(node's subsection)/file_pattern
+    /root_directory/diff/(group)/(node's subsection)/file_pattern
 
 Nodesnap supports Cisco and OmniSwitch devices. It can connect by SSH and
 Telnet.
