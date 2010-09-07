@@ -83,7 +83,7 @@ class Nodesnap(object):
         return None
 
     def __set_logger(self, name, filename,
-                     log_level ='info', log_count =7):
+                     log_level =None, log_count =None):
         """
         Configure the logger and returns it.
         
@@ -109,6 +109,9 @@ class Nodesnap(object):
         elif log_level == 'critical':
             level = logging.CRITICAL
 
+        if log_count is None:
+            log_count = 7
+
         # Get the logger from the name.
         self.logger  = logging.getLogger(name)
         self.handler = logging.handlers.RotatingFileHandler(filename,
@@ -123,6 +126,11 @@ class Nodesnap(object):
 
         self.logger.setLevel(level)
         self.logger.addHandler(self.handler)
+
+        self.logger.debug('Configured logger: %(f)s, %(l)s, %(c)s' % \
+                          {'f': filename,
+                           'l': log_level,
+                           'c': log_count})
 
 
     def get_root_directory(self, item, node_section):
