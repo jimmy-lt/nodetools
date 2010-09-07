@@ -8,7 +8,7 @@ then gets their running's configuration. This configuration is written on the
 local host.
 
 
-INSTALL
+Install
 -------
 
 Packaging is one of future work to do.
@@ -22,7 +22,7 @@ Change to the nodesnap source directory and run:
   python nodesnap.py /path/to/config_file.ini
 
 
-FEATURES
+Features
 --------
 
 Nodesnap reads an INI file described futher. It will connect to all hosts
@@ -42,15 +42,14 @@ Nodesnap can sends e-mails containing the grabbed configuration and the
 differences from the last backup.
 
 
-CONFIGURATION
+Configuration
 -------------
 
 This utility needs an INI file for its configuration. Here are the different
 sections and options.
 
 
- * General sections
-   ----------------
+### General sections
 
 [general]
 root_directory = (string) " Working directory in which backups will be stored.
@@ -73,8 +72,7 @@ send_diff     = (bool)    " Send the differences from the last backup file.
 [contact::subsection]
 e-mail        = (string)  " Recipient's e-mail address.
 
- * Node sections
-   -------------
+### Node sections
 
 The Cisco section [Cisco] or OmniSwitch section [OmniSwitch] share the same
 options.
@@ -95,14 +93,13 @@ hostname      = (string)  " Host address
 group         = (string)  " Host's group name. So, you can put many hosts
                           " together in the same directory.
 
-* Good to know
-  ------------
+### Good to know
 
 All section options can be overloaded in subsections. So you can redefine an
 already defined section's option in a subsection. The last one will be used.
 
 
-TODO
+Todo
 ----
 
 - Packaging
@@ -110,9 +107,8 @@ TODO
 - Threads support for parallel connections
 
 
-COPYRIGHT
+Copyright
 ---------
-
 
 Copyright (C) 2010  Jimmy Thrasibule
 
