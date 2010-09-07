@@ -104,6 +104,15 @@ class Config(ConfigParser):
                                        ('e-mail', 'string', True),
                                       ),
                                      ),
+                       'logger':     (
+                                      False,
+                                      False,
+                                      (
+                                       ('file_path', 'string', False),
+                                       ('level', 'string', False),
+                                       ('count', 'int', False)
+                                       )
+                                      ),
                        __nodes_section_name[0]: (
                                       False,
                                       True,

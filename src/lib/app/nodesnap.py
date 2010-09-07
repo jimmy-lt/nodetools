@@ -48,7 +48,12 @@ class Nodesnap(object):
         # TODO: put the logger in its own class and make it prettier.
         self.logger  = None
         self.handler = None
-        self.__set_logger('nodesnap', 'nodesnap.log', logging.DEBUG)
+
+        if self.get_config_value('logger', 'file_path'):
+            self.__set_logger('nodesnap',
+                              self.get_config_value('logger', 'file_path'),
+                              self.get_config_value('logger', 'level'),
+                              self.get_config_value('logger', 'count'))
 
     def __del__(self):
         """
@@ -77,7 +82,8 @@ class Nodesnap(object):
             return self.config.get_value(section, option)
         return None
 
-    def __set_logger(self, name, filename, log_level):
+    def __set_logger(self, name, filename,
+                     log_level ='info', log_count =7):
         """
         Configure the logger and returns it.
         
@@ -91,20 +97,31 @@ class Nodesnap(object):
             Logging level.
         """
 
+        level = logging.INFO
+        if log_level == 'debug':
+            level = logging.DEBUG
+        elif log_level == 'info':
+            level = logging.INFO
+        elif log_level == 'warning':
+            level = logging.WARNING
+        elif log_level == 'error':
+            level = logging.ERROR
+        elif log_level == 'critical':
+            level = logging.CRITICAL
+
         # Get the logger from the name.
-        # TODO: add some configuration options for the logging.
         self.logger  = logging.getLogger(name)
         self.handler = logging.handlers.RotatingFileHandler(filename,
                                                             mode ='w',
-                                                            backupCount =7)
+                                                            backupCount =log_count)
 
         # We use a different format for debugging purpose.
-        if log_level == logging.INFO:
+        if level == logging.INFO:
             self.handler.setFormatter(logging.Formatter(self.__info_format))
         else:
             self.handler.setFormatter(logging.Formatter(self.__debug_format))
 
-        self.logger.setLevel(log_level)
+        self.logger.setLevel(level)
         self.logger.addHandler(self.handler)
 
 

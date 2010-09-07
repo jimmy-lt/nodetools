@@ -68,6 +68,12 @@ sections and options.
     send_backup   = (bool)    " Send the last configuration.
     send_diff     = (bool)    " Send the differences from the last backup file.
 
+    [logger]
+    file_path     = (string)  " Path to log file.
+    level         = (string)  " Logging level: debug, info, warning, error,
+                              " critical.
+    count         = (int)     " Maximum number of log files to keep.
+
     [contact::subsection]
     e-mail        = (string)  " Recipient's e-mail address.
 
