@@ -101,7 +101,6 @@ already defined section's option in a subsection. The last one will be used.
 Todo
 ----
 
-- Packaging
 - A prettier logger solution
 - Threads support for parallel connections
 
