@@ -8,7 +8,7 @@
 from distutils.core import setup
 
 setup(name        ='Nodesnap',
-      version     ='0.pre-alpha',
+      version     ='pre-alpha',
       description ='Utility for making network nodes backup',
       author      ='Jimmy Thrasibule',
       package_dir = {'': 'src/lib'},
