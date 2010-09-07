@@ -51,47 +51,47 @@ sections and options.
 
 ### General sections
 
-[general]
-root_directory = (string) " Working directory in which backups will be stored.
-file_pattern   = (string) " Filename pattern.
-                          " This pattern uses the Unix date format and a
-                          " personal format:
-                          "   - %0, node's hostname;
-                          "   - %1, node's subsection name.
-rotation      = (integer) " Number of files to keep in each directory. If this
-                          " number is reached, oldest files will be deleted.
-write_diff    = (bool)    " Do you want to write the difference between the
-                          " last saved file and the running configuration?
+    [general]
+    root_directory = (string) " Working directory in which backups will be stored.
+    file_pattern   = (string) " Filename pattern.
+                              " This pattern uses the Unix date format and a
+                              " personal format:
+                              "   - %0, node's hostname;
+                              "   - %1, node's subsection name.
+    rotation      = (integer) " Number of files to keep in each directory. If this
+                              " number is reached, oldest files will be deleted.
+    write_diff    = (bool)    " Do you want to write the difference between the
+                              " last saved file and the running configuration?
 
-[contact]
-mail_server   = (string)  " Mail server address (localhost by default).
-sender        = (string)  " Sender's e-mail address.
-send_backup   = (bool)    " Send the last configuration.
-send_diff     = (bool)    " Send the differences from the last backup file.
+    [contact]
+    mail_server   = (string)  " Mail server address (localhost by default).
+    sender        = (string)  " Sender's e-mail address.
+    send_backup   = (bool)    " Send the last configuration.
+    send_diff     = (bool)    " Send the differences from the last backup file.
 
-[contact::subsection]
-e-mail        = (string)  " Recipient's e-mail address.
+    [contact::subsection]
+    e-mail        = (string)  " Recipient's e-mail address.
 
 ### Node sections
 
 The Cisco section [Cisco] or OmniSwitch section [OmniSwitch] share the same
 options.
 
-[OmniSwitch] or [Cisco]
-connection    = (string)  " This option has two possible value: ssh or telnet.
-failover      = (string)  " This option is used when the 'connection' option
-                          " fails. It takes the same values as the 'connection'
-                          " option.
-options       = (string)  " Not used for now.
-username      = (string)  " Host user name.
-password      = (string)  " Host password.
-prompt        = (string)  " Host prompt (the value can be a regular expression).
-timeout       = (integer) " Maximum time to wait (default 15 seconds).
+    [OmniSwitch] or [Cisco]
+    connection    = (string)  " This option has two possible value: ssh or telnet.
+    failover      = (string)  " This option is used when the 'connection' option
+                              " fails. It takes the same values as the 'connection'
+                              " option.
+    options       = (string)  " Not used for now.
+    username      = (string)  " Host user name.
+    password      = (string)  " Host password.
+    prompt        = (string)  " Host prompt (the value can be a regular expression).
+    timeout       = (integer) " Maximum time to wait (default 15 seconds).
 
-[OmniSwitch::subsection] or [Cisco::subsection]
-hostname      = (string)  " Host address
-group         = (string)  " Host's group name. So, you can put many hosts
-                          " together in the same directory.
+    [OmniSwitch::subsection] or [Cisco::subsection]
+    hostname      = (string)  " Host address
+    group         = (string)  " Host's group name. So, you can put many hosts
+                              " together in the same directory.
 
 ### Good to know
 
