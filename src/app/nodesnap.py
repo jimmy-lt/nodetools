@@ -37,7 +37,7 @@ class Nodesnap(object):
         """
         Nodesnap constructor.
 
-        @param config_file:
+        :param config_file:
             Path to INI configuration file.
         """
 
@@ -65,10 +65,10 @@ class Nodesnap(object):
         """
         A safe wrapper in order to get an option from the configuration.
 
-        @param section:
+        :param section:
             Configuration's section name.
 
-        @param option:
+        :param option:
             Section's option to get the value from.
         """
 
@@ -80,6 +80,15 @@ class Nodesnap(object):
     def __set_logger(self, name, filename, log_level):
         """
         Configure the logger and returns it.
+        
+        :param name:
+            Logger's session name.
+        
+        :param filename:
+            File name in which logs will be written.
+            
+        :param log_level:
+            Logging level.
         """
 
         # Get the logger from the name.
@@ -103,7 +112,7 @@ class Nodesnap(object):
         """
         This method returns the root directory for the given node section.
 
-        @param item:
+        :param item:
             The item parameter must be 'diff' or 'backup'.
 
             If it is set to 'diff', the root directory to store diffs will be
@@ -112,7 +121,7 @@ class Nodesnap(object):
             If it is set to 'backup', the root directory to store backups will
             be returned.
 
-        @param node_section:
+        :param node_section:
             For which node do we have to return the root directory ?
         """
 
@@ -149,7 +158,7 @@ class Nodesnap(object):
         It will first try to use the mode provided by the 'connection' option.
         If this one fails it will try the 'failover' option.
 
-        @param node_section:
+        :param node_section:
             Node's configuration section.
         """
 
@@ -232,6 +241,16 @@ class Nodesnap(object):
 
         - %0: Node's hostname.
         - %1: Node's subsection name.
+        
+        :param node_section:
+            Node's section to formatting the file name for.
+        
+        :param host:
+            Node object. This object can be used in order to get some
+            information from the host.
+        
+        :param apply_date:
+            Should we applying the date on the pattern?
         """
 
         pattern = self.get_config_value('general', 'file_pattern')
@@ -273,7 +292,8 @@ class Nodesnap(object):
                     continue
 
                 # Set up the backup's root directory and filename.
-                config_directory = self.get_root_directory('backup', node_section)
+                config_directory = self.get_root_directory('backup',
+                                                           node_section)
                 filename = self.format_filename(node_section, host)
 
                 # We get the running configuration without any comments.
@@ -284,7 +304,8 @@ class Nodesnap(object):
                 for line in running_config:
                     self.logger.debug(line)
 
-                # We create a new Backup object to store the running configuration.
+                # We create a new Backup object to store the running
+                # configuration.
                 config_bak = backup.Backup(config_directory)
 
                 # The pattern will help use to find the most recent file.
@@ -336,7 +357,8 @@ class Nodesnap(object):
                             self.send('diff', node_section, delta)
 
                             # Apply file rotation on the diff directory.
-                            delta_bak.rotate(self.get_config_value('general', 'rotation'))
+                            delta_bak.rotate(self.get_config_value('general',
+                                                                   'rotation'))
 
                 # Apply file rotation on the backup directory.
                 config_bak.rotate(self.get_config_value('general', 'rotation'))
@@ -346,6 +368,15 @@ class Nodesnap(object):
     def send(self, item, node_section, msg):
         """
         This method sends the given message to involved contacts.
+        
+        :param item:
+            Which type of e-mail do we send? 'backup' or 'diff'?
+        
+        :param node_section:
+            Node for which we are sending an e-mail.
+        
+        :param msg:
+            Message to send.
         """
 
         sections = self.config.get_subsections('contact')
@@ -357,9 +388,11 @@ class Nodesnap(object):
 
             # The title is set according to the 'item' parameter.
             title = ''
-            if item == 'backup' and self.get_config_value('contact', 'send_backup'):
+            if item == 'backup' and self.get_config_value('contact',
+                                                          'send_backup'):
                 title = 'New configuration for '
-            elif item == 'diff' and self.get_config_value('contact', 'send_diff'):
+            elif item == 'diff' and self.get_config_value('contact',
+                                                          'send_diff'):
                 title = 'New change on '
             else: return
 
@@ -368,7 +401,8 @@ class Nodesnap(object):
                      + self.get_config_value(node_section, 'hostname') \
                      + ')'
 
-            email = mail.Mail(sender =sender, to =to, subject =title, message =msg)
+            email = mail.Mail(sender =sender, to =to,
+                              subject =title, message =msg)
             if mail_server:
                 email.set_server(mail_server)
 
