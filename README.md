@@ -11,15 +11,14 @@ local host.
 Install
 -------
 
-Packaging is one of future work to do.
-
-
 Nodesnap depends of the pexpect module (http://www.noah.org/wiki/Pexpect).
 You must install it before using this tool.
 
-Change to the nodesnap source directory and run:
+Then install Nodesnap by using the setup.py file:
+    python setup.py install
 
-    python nodesnap.py /path/to/config_file.ini
+You can now run Nodesnap from your command line interface:
+    nodesnap /path/to/config_file.ini
 
 
 Features
