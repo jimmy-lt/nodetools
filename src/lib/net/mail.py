@@ -45,7 +45,7 @@ class Mail(object):
             self.set_sender(sender)
 
         if to is not None:
-            self.add_receiver(to)
+            self.add_recipient(to)
 
         if subject is not None:
             self.set_subject(subject)
@@ -132,7 +132,7 @@ class Mail(object):
 
     def add_recipient(self, to):
         """
-        Add  
+        Add a recipient to the list.
         """
 
         self.__to.append(to)
@@ -177,14 +177,14 @@ class Mail(object):
 
         mail = MIMEText(self.get_message())
         mail['From'] = self.get_sender()
-        mail['To'] = COMMASPACE.join(self.get_receiver())
+        mail['To'] = COMMASPACE.join(self.get_recipient())
         mail['Date'] = formatdate(localtime=True)
         mail['Subject'] = self.get_subject()
 
         self.logger.debug('Mail server: ' + self.get_server())
         self.logger.info('Sending mail \'%(s)s\' to %(t)s.' % \
                          {'s': self.get_subject(),
-                          't': ', '.join(self.get_receiver())})
+                          't': ', '.join(self.get_recipient())})
 
         smtp = smtplib.SMTP(self.get_server())
         smtp.sendmail(self.get_sender(), self.get_recipient(), mail.as_string())
