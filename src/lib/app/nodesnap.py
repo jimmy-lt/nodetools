@@ -281,12 +281,14 @@ class Nodesnap(object):
         pattern = self.get_config_value('general', 'file_pattern')
         self.logger.debug('Input pattern: ' + pattern)
 
-        pattern = re.sub('%0',
-                         host.get_hostname(),
-                         pattern)
-        pattern = re.sub('%1',
-                         self.config.get_subsection_name(node_section),
-                         pattern)
+        if re.match('%0', pattern):
+            pattern = re.sub('%0',
+                             host.get_hostname(),
+                             pattern)
+        if re.match('%1', pattern):
+            pattern = re.sub('%1',
+                             self.config.get_subsection_name(node_section),
+                             pattern)
 
         self.logger.debug('Pattern before applying date: ' + pattern)
         if apply_date:
