@@ -148,6 +148,7 @@ class SSH(Connect):
     """
 
     __first_connection = "Are you sure you want to continue connecting (yes/no)?"
+    __password = "%(usename)s@.*'s password:"
     __kb_interractive  = "%(username)s's password for keyboard-interactive method:"
     __exchange_id_conn_closed = "ssh_exchange_identification: Connection closed by remote host"
 
@@ -184,6 +185,7 @@ class SSH(Connect):
 
                                          self.default_login_str,
 
+                                         self.__password,
                                          self.__kb_interractive % {'username': self.username},
                                          self.default_password_str,
 
@@ -202,15 +204,15 @@ class SSH(Connect):
                     # Demande du nom d'utilisateur.
                     self.child.sendline(self.username)
 
-                if ret == 2 or ret == 3:
+                if ret == 2 or ret == 3 or ret == 4:
                     # Demande du mot de passe.
                     self.child.sendline(self.password)
 
-                if ret == 4:
+                if ret == 5:
                     # On a le prompt.
                     return True
 
-                if ret == 5:
+                if ret == 6:
                     return False
             except pexpect.TIMEOUT:
                 return False
