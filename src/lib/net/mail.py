@@ -2,11 +2,16 @@
 #
 # Package: net.mail
 #
+import sys
+
 try:
     import logging
     import smtplib
 
-    from email.mime.text import MIMEText
+    if (sys.version_info < (2, 5)):
+        from email.MIMEText import MIMEText
+    else:
+        from email.mime.text import MIMEText
     from email.Utils import COMMASPACE, formatdate
 except ImportError, e:
     raise ImportError(str(e) +
