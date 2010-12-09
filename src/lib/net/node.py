@@ -255,3 +255,71 @@ class OmniSwitch(Node):
 
             if match:
                 return match.group(1).lower()
+
+
+class SR77xx(Node):
+    """
+    Cette classe automatise les différentes actions pour les systèmes 77xx
+    Service Router.
+    """
+
+    __default_prompt = re.compile('(.*)#\s')
+    __comment_marker = '#'
+
+    __more = 'Press any key to continue (Q to quit)'
+
+    __show_config  = 'admin display-config'
+    __show_chassis = 'show chassis'
+
+
+
+    def __init__(self, mode, hostname, username, password =None, prompt =None,
+                 timeout =15):
+        """
+        Constructeur de la classe OmniSwitch.
+        """
+
+        self.__config = None
+
+        if prompt is not None:
+            Node.__init__(self, mode, hostname, username, password, prompt,
+                          timeout)
+        else:
+            Node.__init__(self, mode, hostname, username, password,
+                          self.__default_prompt, timeout)
+
+
+
+    def run(self, command, expected =None):
+        if expected is None:
+            expected = {}
+        expected[self.__more] = ' '
+
+        return Node.run(self, command, expected)
+
+
+    def get_config(self, refresh =False, clear_comments =False):
+        """
+        Récupère la configuration courrante de l'hôte.
+        """
+
+        if self.__config is None or refresh:
+            self.__config = self.connection.run(self.__show_config)
+
+        if clear_comments:
+            return util.text.clear_comments(self.__config, self.__comment_marker)
+
+        return self.__config
+
+    def get_hostname(self):
+        """
+        Retourne le nom d'hôte du système.
+        """
+
+        chassis = self.run(self.__show_chassis)
+
+        for line in chassis:
+            match = re.match('\s+Name\s+:\s+(.*)', line)
+
+            if match:
+                return match.group(1).lower()
