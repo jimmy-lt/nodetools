@@ -237,6 +237,9 @@ class Nodesnap(object):
             if node_type == 'OmniSwitch':
                 host = node.OmniSwitch(mode, hostname, username, password,
                                        prompt, timeout)
+            if node_type == 'OmniStack':
+                host = node.OmniStack(mode, hostname, username, password,
+                                      prompt, timeout)
             if node_type == 'SR77xx':
                 host = node.SR77xx(mode, hostname, username, password, prompt,
                                    timeout)

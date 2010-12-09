@@ -50,6 +50,7 @@ class Config(ConfigParser):
 
     __nodes_section_name     = (
                                 'OmniSwitch',
+                                'OmniStack',
                                 'Cisco',
                                 'SR77xx',
                                )
@@ -127,6 +128,12 @@ class Config(ConfigParser):
                                       __nodes_spec_sub_options,
                                      ),
                        __nodes_section_name[2]: (
+                                      False,
+                                      True,
+                                      __nodes_spec_options,
+                                      __nodes_spec_sub_options,
+                                     ),
+                       __nodes_section_name[3]: (
                                       False,
                                       True,
                                       __nodes_spec_options,
