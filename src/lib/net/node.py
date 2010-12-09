@@ -364,7 +364,7 @@ class OmniStack(Node):
         ret = self.run(self.__show_privilege)
         for line in ret:
             match = re.match('Current privilege level is (\d+)', line)
-            invalid_input = re.match('% Invalid input detected.*')
+            invalid_input = re.match('% Invalid input detected.*', line)
 
             if match:
                 self.__level = match.group(1)
