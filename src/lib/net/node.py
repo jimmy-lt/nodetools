@@ -386,7 +386,7 @@ class SR77xx(Node):
     __default_prompt = re.compile('(.*)#\s')
     __comment_marker = '#'
 
-    __more = 'Press any key to continue (Q to quit)'
+    __more = 'Press any key to continue \(Q to quit\)'
 
     __show_config  = 'admin display-config'
     __show_chassis = 'show chassis'
